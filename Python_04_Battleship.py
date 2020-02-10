@@ -21,10 +21,10 @@ def generate_board(rows, columns):
 
     game_board = []
 
-    for i in range(0, rows):
+    for _ in range(0, rows):
         game_row = []
 
-        for j in range(0, columns):
+        for _ in range(0, columns):
             game_cell = 0
             game_row.append(game_cell)
     
