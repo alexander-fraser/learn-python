@@ -1,6 +1,6 @@
 # Battleship
 # Alexander Fraser
-# 31 January 2019
+# 9 February 2020
 
 # A simple 1-player game of battleship.
 
