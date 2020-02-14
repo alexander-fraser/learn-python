@@ -34,23 +34,45 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 def main():
-    # Inputs
-    save_name1 = 'Depth-First Maze 01.png'
-    save_name2 = 'Depth-First Maze 01 - Path.png'
-    num_rows = 10
-    num_cols = 10
+    # Default inputs.
+    maze_defaults = {}
+    maze_defaults['save_maze'] = 'Depth-First Maze 01.png'
+    maze_defaults['save_path'] = 'Depth-First Maze 01 - Path.png'
+    maze_defaults['num_rows'] = 10
+    maze_defaults['num_cols'] = 10
+    maze_defaults['colour_on'] = 0
+    maze_defaults['colour_incrementer'] = 1
+    
+    maze_inputs = collect_inputs(maze_defaults)   # Collect inputs from user.
+        
+    M = generate_depth_first_maze(maze_inputs)   # Run the maze generator.
+    generate_maze_image(maze_inputs, M)   # Visualize the maze.
+    generate_path_image(maze_inputs, M)   # Visualize the maze as a path.
+
+def collect_inputs(maze_defaults):
+    # Collect inputs from the user.
+    # This function is not currently set up. It just passes the defaults along.
+    maze_inputs = {}
+
+    for key in maze_defaults:
+        try:
+            maze_inputs[key] = maze_defaults[key]
+        except ValueError:
+            maze_inputs[key] = maze_defaults[key]
+
+    return maze_inputs
+
+def generate_depth_first_maze(maze_inputs):
+    # Generate the maze using a depth-first algorithm.
+    # Set up the maze board.
+    num_rows = maze_inputs['num_rows']
+    num_cols = maze_inputs['num_cols']
     M = np.zeros((num_rows, num_cols, 6), dtype=np.uint8)
     r = int(num_rows / 2)   # Start in the middle, since the first paths tend to be linear.
     c = int(num_cols / 2)
     history = [(r, c)]
-    colour_incrementer = 1
-
-    # Function calls
-    M = generateDepthFirstMaze(num_rows, num_cols, r, c, history, colour_incrementer, M)
-    generateMazeImage(num_rows, num_cols, M, save_name1)
-    generatePathImage(num_rows, num_cols, M, save_name2)
-
-def generateDepthFirstMaze(num_rows, num_cols, r, c, history, colour_incrementer, M):
+    colour_incrementer = maze_inputs['colour_incrementer']
+    
     back_track_indicator = False
 
     while history:   # The history is the stack of visited locations.
@@ -104,9 +126,11 @@ def generateDepthFirstMaze(num_rows, num_cols, r, c, history, colour_incrementer
 
     return M
 
-def generateMazeImage(num_rows, num_cols, M, save_name):
+def generate_maze_image(maze_inputs, M):
     # Generate the image for display. Each cell is 10x10 pixels, with walls being 1 pixel
     # wide on each side (so outside walls are 1 pixel and inner walls are 2 pixels).
+    num_rows = maze_inputs['num_rows']
+    num_cols = maze_inputs['num_cols']
     ct = 10  # Cell thickness. Must be 3 or greater.
     image = np.zeros((num_rows * ct, num_cols * ct), dtype=np.uint8)
     cell_colour = 255
@@ -124,11 +148,13 @@ def generateMazeImage(num_rows, num_cols, M, save_name):
 
     plt.imshow(image, cmap='gray', interpolation='none')
     plt.show()
-    plt.imsave(save_name, image, cmap='gray')
+    plt.imsave(maze_inputs['save_maze'], image, cmap='gray')
 
-def generatePathImage(num_rows, num_cols, M, save_name):
+def generate_path_image(maze_inputs, M):
     # Generate the image of the path for display. Each cell is 11x11 pixels,
     # with the path being 1 pixel thick.
+    num_rows = maze_inputs['num_rows']
+    num_cols = maze_inputs['num_cols']
     ct = 11   # Cell thickness. Must be 3 or greater.
     cto = int(ct / 2)   # Cell offset.
     image = np.zeros((num_rows * ct, num_cols * ct), dtype=np.uint8)
@@ -146,7 +172,7 @@ def generatePathImage(num_rows, num_cols, M, save_name):
 
     plt.imshow(image, cmap='gray', interpolation='none')
     plt.show()
-    plt.imsave(save_name, image, cmap='gray')
+    plt.imsave(maze_inputs['save_path'], image, cmap='gray')
 
 if __name__ == "__main__":
     main()
