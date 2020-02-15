@@ -41,12 +41,13 @@ def main():
     
     maze_inputs = collect_inputs(maze_defaults)   # Collect inputs from user. 
     
-    wall_list = generate_wall_list(maze_inputs)
-    M = generate_kruskal_maze(maze_inputs, wall_list)   # Run the maze generator.
+    M = generate_kruskal_maze(maze_inputs)   # Run the maze generator.
     generate_maze_image(maze_inputs, M)   # Visualize the maze.
     generate_path_image(maze_inputs, M)   # Visualize the maze as a path.
 
 def generate_wall_list(maze_inputs):
+    # Generate a list of all initial walls within the maze.
+    
     num_rows = maze_inputs['num_rows']
     num_cols = maze_inputs['num_cols'] 
     wall_list = []
@@ -65,14 +66,15 @@ def generate_wall_list(maze_inputs):
 
     return wall_list
 
-def generate_kruskal_maze(maze_inputs, wall_list):
+def generate_kruskal_maze(maze_inputs):
     # Generate the maze using a depth-first algorithm.
     # Set up the maze board.
     
     num_rows = maze_inputs['num_rows']
     num_cols = maze_inputs['num_cols']    
     M = np.zeros((num_rows, num_cols, 6), dtype=np.uint8)
-    
+    wall_list = generate_wall_list(maze_inputs)
+
     while wall_list:   # The list of all walls.
         wall = random.choice(wall_list)
         wall_list.remove(wall)
