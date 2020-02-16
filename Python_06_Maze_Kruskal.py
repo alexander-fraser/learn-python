@@ -21,7 +21,7 @@ The array M is going to hold the array information for each cell.
 The first four coordinates tell if walls exist on those sides.
 The fifth is NULL and is used to keep the format of the table consistent.
 The last coordinate is used to trace how the maze is generated using colour.
-M(LEFT, UP, RIGHT, DOWN, NULL, COLOUR)
+M(ROW, COL, X) : X = (LEFT, UP, RIGHT, DOWN, SET, COLOUR)
 """
 
 import random
@@ -79,6 +79,8 @@ def generate_kruskal_maze(maze_inputs):
         wall = random.choice(wall_list)
         wall_list.remove(wall)
 
+        M[wall] = 1
+
     # Currently, this code just goes through all walls and does nothing.
     # Enter the code here that checks the walls and combines the sets.
 
@@ -87,6 +89,7 @@ def generate_kruskal_maze(maze_inputs):
     M[0, 0, 0] = 1   # Left side of top-left-most cell.
     M[num_rows - 1, num_cols - 1, 2] = 1   # Right side of bottom-right-most cell.
 
+    print(M)
     return M
 
 if __name__ == "__main__":

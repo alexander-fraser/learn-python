@@ -24,7 +24,7 @@ The array M is going to hold the array information for each cell.
 The first four coordinates tell if walls exist on those sides
 and the fifth indicates if the cell has been visited in the search.
 The last coordinate is used to trace how the maze is generated using colour.
-M(LEFT, UP, RIGHT, DOWN, CHECK_IF_VISITED, COLOUR)
+M(ROW, COL, X) : X = (LEFT, UP, RIGHT, DOWN, CHECK_IF_VISITED, COLOUR)
 
 The output is saved in two formats.
 """
@@ -133,12 +133,16 @@ def generate_maze_image(maze_inputs, M):
     num_cols = maze_inputs['num_cols']
     ct = 10  # Cell thickness. Must be 3 or greater.
     image = np.zeros((num_rows * ct, num_cols * ct), dtype=np.uint8)
-    cell_colour = 255
-
+    
     for row in range(0, num_rows):
         for col in range(0, num_cols):
             cell_data = M[row, col]
-            cell_colour = cell_data[5]   # Used if you want a somewhat traceable path.
+            
+            if maze_inputs['colour_on'] == 1:
+                cell_colour = cell_data[5]   # Used if you want a somewhat traceable path.
+            else:
+                cell_colour = 255
+
             for i in range(ct * row + 1, ct * row + (ct - 1)):
                 image[i, range(ct * col + 1, ct * col + (ct - 1))] = cell_colour
             if cell_data[0] == 1: image[range(ct * row + 1, ct * row + (ct - 1)), ct * col] = cell_colour
@@ -158,12 +162,16 @@ def generate_path_image(maze_inputs, M):
     ct = 11   # Cell thickness. Must be 3 or greater.
     cto = int(ct / 2)   # Cell offset.
     image = np.zeros((num_rows * ct, num_cols * ct), dtype=np.uint8)
-    cell_colour = 255
-
+    
     for row in range(0, num_rows):
         for col in range(0, num_cols):
             cell_data = M[row, col]
-            cell_colour = cell_data[5]   # Used if you want a somewhat traceable path.
+            
+            if maze_inputs['colour_on'] == 1:
+                cell_colour = cell_data[5]   # Used if you want a somewhat traceable path.
+            else:
+                cell_colour = 255
+
             image[ct * row + cto, ct * col + cto] = cell_colour
             if cell_data[0] == 1: image[ct * row + cto, range(ct * col, ct * col + cto)] = cell_colour
             if cell_data[1] == 1: image[range(ct * row, ct * row + cto), ct * col + cto] = cell_colour
