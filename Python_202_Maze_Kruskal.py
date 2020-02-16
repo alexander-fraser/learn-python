@@ -27,7 +27,7 @@ M(ROW, COL, X) : X = (LEFT, UP, RIGHT, DOWN, SET, COLOUR)
 import random
 import numpy as np
 from matplotlib import pyplot as plt
-from Python_05_Maze_Depth_First import collect_inputs, generate_maze_image, generate_path_image
+from Python_201_Maze_Depth_First import collect_inputs, generate_maze_image, generate_path_image
 
 def main():
     # Default inputs.
@@ -56,15 +56,30 @@ def generate_wall_list(maze_inputs):
         for c in range(num_cols):
             for wall in range(4):
                 if c > 0 and wall == 0:
-                    wall_list.append((r, c, wall))
+                    wall_list.append([r, c, wall])
                 if r > 0 and wall == 1:
-                    wall_list.append((r, c, wall))
+                    wall_list.append([r, c, wall])
                 if c < num_cols - 1 and wall == 2:
-                    wall_list.append((r, c, wall))
+                    wall_list.append([r, c, wall])
                 if r < num_rows - 1 and wall == 3:
-                    wall_list.append((r, c, wall))
+                    wall_list.append([r, c, wall])
 
+    #print(wall_list)
     return wall_list
+
+def generate_cell_list(maze_inputs):
+    # Generate a list of all initial cells within the maze.
+    
+    num_rows = maze_inputs['num_rows']
+    num_cols = maze_inputs['num_cols'] 
+    cell_list = []
+    
+    for r in range(num_rows):
+        for c in range(num_cols):
+            cell_list.append([r, c])
+
+    #print(cell_list)
+    return cell_list
 
 def generate_kruskal_maze(maze_inputs):
     # Generate the maze using a depth-first algorithm.
@@ -74,22 +89,49 @@ def generate_kruskal_maze(maze_inputs):
     num_cols = maze_inputs['num_cols']    
     M = np.zeros((num_rows, num_cols, 6), dtype=np.uint8)
     wall_list = generate_wall_list(maze_inputs)
+    set_list = generate_cell_list(maze_inputs)
 
     while wall_list:   # The list of all walls.
+        # Choose a wall from the list of walls at random.
         wall = random.choice(wall_list)
         wall_list.remove(wall)
 
-        M[wall] = 1
+        # Check if the wall is separating cells in different sets.
+        if wall[2] == 0:
+            M[r, c, 0] = 1
+            c = c - 1
+            M[r, c, 2] = 1
+        if move_direction == 'U':
+            M[r, c, 1] = 1
+            r = r - 1
+            M[r, c, 3] = 1
+        if move_direction == 'R':
+            M[r, c, 2] = 1
+            c = c + 1
+            M[r, c, 0] = 1
+        if move_direction == 'D':
+            M[r, c, 3] = 1
+            r = r + 1
+            M[r, c, 1] = 1
+
+
+        # If above is true, remove the wall.
+        M[wall] = 1     # Remove the selected wall.
+
+
+
+        # Merge the sets from the two cells.
+
+
+
 
     # Currently, this code just goes through all walls and does nothing.
     # Enter the code here that checks the walls and combines the sets.
-
 
     # Open the walls at the start and finish.
     M[0, 0, 0] = 1   # Left side of top-left-most cell.
     M[num_rows - 1, num_cols - 1, 2] = 1   # Right side of bottom-right-most cell.
 
-    print(M)
     return M
 
 if __name__ == "__main__":

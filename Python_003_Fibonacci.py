@@ -5,7 +5,7 @@
 # This program outputs all Fibonacci numbers up to the 
 # integer specified by the user.
 
-import Python_02_Primes as prime_script
+import Python_002_Primes as prime_script
 
 def compute_fibonacci(limit_value):
     fib_list = [1]
