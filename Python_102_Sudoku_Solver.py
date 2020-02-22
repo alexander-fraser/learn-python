@@ -1,20 +1,17 @@
 # Sudoku Solver
 # Alexander Fraser
-# 16 February 2020
+# 22 February 2020
 
 # Solves Sudoku puzzles using a recursive algorithm.
 
 import numpy as np
+import time
 
 def main():
     unsolved_puzzle = import_sudoku()
-    print(np.asarray(unsolved_puzzle))
+    print("Unsolved puzzle:\n", np.asarray(unsolved_puzzle), "\n")
     
-    global puzzle
-    puzzle = unsolved_puzzle
-    
-    solved_puzzle = sudoku_solver()
-    print(np.asarray(solved_puzzle))
+    sudoku_solver(unsolved_puzzle)
 
 def import_sudoku():
     # Asks the user to enter the sudoku puzzle as a series of 81 integers.
@@ -22,7 +19,7 @@ def import_sudoku():
     # The function outputs the puzzle as a list.
 
     #sudoku_string = input("Pass the sudoku values from top-left to bottom-right, with 0s for blank cells:\n")
-    sudoku_string = "530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+    sudoku_string = "300801002201030604000204000809000106060000050702000409000509000904080705600107003"
 
     sudoku_list = []
 
@@ -33,15 +30,10 @@ def import_sudoku():
             sudoku_row.append( int(sudoku_string[(9*i + j)] ))
         sudoku_list.append(sudoku_row)
 
-    #print(sudoku_string)
-    #print(sudoku_list)
-
     return sudoku_list
 
 def check_valid(puzzle, row, col, value):
-    # Checks whether the given value is a valid option for the specified cell,
-    # given the rules of Sudoku.
-
+    # Checks whether the given value is a valid option for the specified cell.
     # Check rows.
     for i in range(9):
         if puzzle[row][i] == value:
@@ -63,19 +55,19 @@ def check_valid(puzzle, row, col, value):
 
     return True
 
-def sudoku_solver():
+def sudoku_solver(puzzle):
     for row in range(9):
         for col in range(9):
             if puzzle[row][col] == 0:
                 
-                for value in range(9):
+                for value in range(1, 10):
                     if check_valid(puzzle, row, col, value):
                         puzzle[row][col] = value
-                        print(row, col, value)
-                        sudoku_solver()
+                        puzzle = sudoku_solver(puzzle)
                         puzzle[row][col] = 0
-                return
+                return puzzle
     
+    print("Solved puzzle:\n", np.asarray(puzzle), "\n")
     return puzzle
 
 if __name__ == "__main__":
