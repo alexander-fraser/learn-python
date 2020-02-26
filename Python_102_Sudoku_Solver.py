@@ -29,7 +29,7 @@ The solver works by:
 import numpy as np
 
 def main():
-    # Runs the functinos to import and solve the Sudoku puzzle.
+    # Runs the functions to import and solve the Sudoku puzzle.
     unsolved_puzzle = import_sudoku()
     sudoku_solver(unsolved_puzzle)
 
