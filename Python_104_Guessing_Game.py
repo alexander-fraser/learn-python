@@ -16,11 +16,14 @@ from Python_005_Odd_or_Even import collect_integer
 
 
 def get_computer_play():
+    # Generates the computer's random integer.
     computer_play = randint(1,9)
     return computer_play
 
 
 def compare_plays(user_play, computer_play, counter):
+    # Tells the player if they guessed correctly.
+    # Otherwise tells them if their guess was too high or too low.
     if user_play == computer_play:
         print("Correct! It took you {} tries.".format(counter))
         return False
@@ -31,6 +34,7 @@ def compare_plays(user_play, computer_play, counter):
 
 
 def main():
+    # The main gamplay loop. Will continue indefinitely until player chooses to quit.
     while True:
         counter = 0
         computer_play = get_computer_play()
