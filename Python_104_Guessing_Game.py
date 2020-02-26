@@ -15,11 +15,11 @@ from random import randint
 from Python_005_Odd_or_Even import collect_integer
 
 
-def getComputerPlay():
-    computerPlay = randint(1,9)
-    return computerPlay
+def get_computer_play():
+    computer_play = randint(1,9)
+    return computer_play
 
-def collectInput():
+def collect_input():
     while True:
         try:
             userGuess = raw_input("Enter guess (1-9) or exit: ")
@@ -38,11 +38,11 @@ def collectInput():
 
     return userGuess
 
-def comparePlays(userPlay, computerPlay, counter):
-    if userPlay == computerPlay:
+def compare_plays(user_play, computer_play, counter):
+    if user_play == computer_play:
         print("Correct! It took you {} tries.").format(counter)
         return False
-    elif userPlay > computerPlay:
+    elif user_play > computer_play:
         print("Too high.")
     else:
         print("Too low.")
@@ -50,18 +50,18 @@ def comparePlays(userPlay, computerPlay, counter):
 def main():
     while True:
         counter = 0
-        computerPlay = getComputerPlay()
+        computer_play = get_computer_play()
 
         while True:
             counter += 1
-            userPlay = collectInput()
-            if userPlay == "exit":
+            user_play = collect_input()
+            if user_play == "exit":
                 break
-            result = comparePlays(userPlay, computerPlay, counter)
+            result = compare_plays(user_play, computer_play, counter)
             if result == False:
                 break
 
-        if userPlay == "exit":
+        if user_play == "exit":
             break
 
 if __name__ == "__main__":
