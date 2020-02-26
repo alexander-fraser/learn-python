@@ -8,11 +8,13 @@ A one-player Rock-Paper-Scissors game.
 
 from random import randint
 
+
 def collect_input():
-    valid_entries = ["r", "p", "s"]
+    # Prompts the user for their input or to quit the game.
+    valid_entries = ["r", "p", "s", "q"]
 
     while True:
-        user_play = input("Enter rock (r), paper (p), or scissors (s): ")
+        user_play = input("Enter rock (r), paper (p), or scissors (s). Enter (q) to quit: \n")
         if user_play in valid_entries:
             break
         else:
@@ -20,7 +22,9 @@ def collect_input():
 
     return user_play
 
+
 def get_computer_play():
+    # Selects the "computer's play" at random.
     valid_entries = ["r", "p", "s"]
 
     computer_number = randint(1,3)
@@ -28,7 +32,9 @@ def get_computer_play():
 
     return computer_play
 
+
 def compare_plays(user_play, computer_play):
+    # Determines the winner of the round. Goes through every case where the player wins.
     if user_play == computer_play:
         print("Draw.")
     elif user_play == "r" and computer_play == "s":
@@ -40,11 +46,18 @@ def compare_plays(user_play, computer_play):
     else:
         print("Computer wins.")
 
+
 def main():
+    # The main gamplay loop. It will loop until the player decides to quit.
     while True:
         user_play = collect_input()
+
+        if user_play == "q":
+            break
+
         computer_play = get_computer_play()
         compare_plays(user_play, computer_play)
+
 
 if __name__ == "__main__":
     main()
