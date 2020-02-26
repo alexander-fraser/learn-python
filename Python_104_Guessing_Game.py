@@ -19,33 +19,16 @@ def get_computer_play():
     computer_play = randint(1,9)
     return computer_play
 
-def collect_input():
-    while True:
-        try:
-            userGuess = raw_input("Enter guess (1-9) or exit: ")
-            if userGuess == "exit":
-                break
-            else:
-                userGuess = int(userGuess)
-
-            if userGuess in range(0,10):
-                break
-            else:
-                print("Invalid entry. Try again.")
-
-        except:
-            print("Invalid entry. Try again.")
-
-    return userGuess
 
 def compare_plays(user_play, computer_play, counter):
     if user_play == computer_play:
-        print("Correct! It took you {} tries.").format(counter)
+        print("Correct! It took you {} tries.".format(counter))
         return False
     elif user_play > computer_play:
         print("Too high.")
     else:
         print("Too low.")
+
 
 def main():
     while True:
@@ -54,15 +37,16 @@ def main():
 
         while True:
             counter += 1
-            user_play = collect_input()
-            if user_play == "exit":
-                break
+            user_play = collect_integer("Pick a random number between 1 and 9 (inclusive): ", 1, 9)
+
             result = compare_plays(user_play, computer_play, counter)
             if result == False:
                 break
 
-        if user_play == "exit":
+        user_continue = input("Would you like to play again (y/n)?")
+        if user_continue != "y":
             break
+
 
 if __name__ == "__main__":
     main()
