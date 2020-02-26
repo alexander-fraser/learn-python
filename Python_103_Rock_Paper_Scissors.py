@@ -8,43 +8,43 @@ A one-player Rock-Paper-Scissors game.
 
 from random import randint
 
-def collectInput():
-    validEntries = ["r", "p", "s"]
+def collect_input():
+    valid_entries = ["r", "p", "s"]
 
     while True:
-        userPlay = raw_input("Enter rock (r), paper (p), or scissors (s): ")
-        if userPlay in validEntries:
+        user_play = input("Enter rock (r), paper (p), or scissors (s): ")
+        if user_play in valid_entries:
             break
         else:
             print("Invalid entry. Try again.")
 
-    return userPlay
+    return user_play
 
-def getComputerPlay():
-    validEntries = ["r", "p", "s"]
+def get_computer_play():
+    valid_entries = ["r", "p", "s"]
 
-    computerNumber = randint(1,3)
-    computerPlay = validEntries[computerNumber - 1]
+    computer_number = randint(1,3)
+    computer_play = valid_entries[computer_number - 1]
 
-    return computerPlay
+    return computer_play
 
-def comparePlays(userPlay, computerPlay):
-    if userPlay == computerPlay:
+def compare_plays(user_play, computer_play):
+    if user_play == computer_play:
         print("Draw.")
-    elif userPlay == "r" and computerPlay == "s":
+    elif user_play == "r" and computer_play == "s":
         print("Player wins!")
-    elif userPlay == "p" and computerPlay == "r":
+    elif user_play == "p" and computer_play == "r":
         print("Player wins!")
-    elif userPlay == "s" and computerPlay == "p":
+    elif user_play == "s" and computer_play == "p":
         print("Player wins!")
     else:
         print("Computer wins.")
 
 def main():
     while True:
-        userPlay = collectInput()
-        computerPlay = getComputerPlay()
-        comparePlays(userPlay, computerPlay)
+        user_play = collect_input()
+        computer_play = get_computer_play()
+        compare_plays(user_play, computer_play)
 
 if __name__ == "__main__":
     main()
