@@ -40,28 +40,28 @@ def collect_integer(user_message, lower_limit, upper_limit):
     return user_value
 
 
-def print_move(move_from, move_to):
+def print_move(disk, move_from, move_to):
     # Prints the instructions for solving the puzzle.
-    print("Move disk from {} to {}.".format(move_from, move_to))
+    print("Move disk {} from {} to {}.".format(disk, move_from, move_to))
 
 
-def hanoi_move(disks, move_from, move_via, move_to):
+def hanoi_move(disk, move_from, move_via, move_to):
     # Recursive loop that solves the puzzle.
     # Moves all disks above the specified disk to a placeholder.
     # Then moves the specified disk to the "to" place.
     # Finally moves the disks above it back on top of the specified disk.
-    if disks != 0:
-        hanoi_move(disks-1, move_from, move_to, move_via)
-        print_move(move_from, move_to)
-        hanoi_move(disks-1, move_via, move_from, move_to)
+    if disk != 0:
+        hanoi_move(disk-1, move_from, move_to, move_via)
+        print_move(disk, move_from, move_to)
+        hanoi_move(disk-1, move_via, move_from, move_to)
 
 
 def main():
     # Prompts the user to specify the puzzle height.
     # Then calls the solver to print the instructions.
     print("Welcome to the Tower of Hanoi solver.")
-    disks_number = collect_integer("How many disks are in the tower?", 1, 100)
-    hanoi_move(disks_number, "A", "B", "C")
+    hanoi_height = collect_integer("How many disks are in the tower?", 1, 100)
+    hanoi_move(hanoi_height, "A", "B", "C")
 
 
 if __name__ == "__main__":
