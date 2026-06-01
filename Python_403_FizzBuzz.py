@@ -14,25 +14,15 @@ def create_list(size):
     return input_list
 
 def determine_fizzbuzz(value):
-    fizz = 0
-    buzz = 0
-    fizzbuzz = 0
-
-    if value % 3 == 0:
-        fizz = 1
-    if value % 5 == 0:
-        buzz = 1
-    if (fizz == 1 & buzz == 1):
-        fizzbuzz = 1
-
-    if fizzbuzz == 1:
-        return "fizzbuzz"
-    elif fizz == 1:
-        return "fizz"
-    elif buzz == 1:
-        return "buzz"
-    else:
-        return str(value)
+   match value:
+        case x if (x % 3 == 0) & (x % 5 == 0):
+            return "fizzbuzz"
+        case x if x % 3 == 0:
+            return "fizz"
+        case x if x % 5 == 0:
+            return "buzz"
+        case _:
+            return str(value)
 
 def process_output(input_list):
     output_list = map(determine_fizzbuzz, input_list)
