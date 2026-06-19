@@ -1,6 +1,7 @@
 # Palindrome
 # Alexander Fraser
 # 19 June 2026
+# Checks if the entered phrase is a palindrome.
 
 def collect_input():
     return input("Enter phrase:")
