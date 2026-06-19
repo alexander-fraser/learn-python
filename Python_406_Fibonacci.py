@@ -15,26 +15,19 @@ def collect_input():
     return requested_value
 
 def calculate_fib(requested_value):
-    old_fib = 0
-    new_fib = 1
+    fib_list = [0, 1]
 
-    match requested_value:
-        case 1:
-            return old_fib
-        case 2:
-            return new_fib
-        case _:
-            pass
+    if requested_value <= 2:
+        return fib_list[requested_value-1]
 
-    for i in range(3, requested_value):
-        calc_fib = old_fib + new_fib 
-        old_fib = new_fib
-        new_fib = calc_fib
-    return calc_fib
+    for i in range(3, requested_value+1):
+        fib_list.append(fib_list[i-2] + fib_list[i-3])
+    return fib_list, fib_list[requested_value-1]
 
 def main():
     requested_value = collect_input()
-    fib_value = calculate_fib(requested_value)
+    fib_list, fib_value = calculate_fib(requested_value)
+    print(fib_list)
     print(fib_value)
 
 if __name__ == "__main__":
