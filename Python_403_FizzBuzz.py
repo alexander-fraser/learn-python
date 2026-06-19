@@ -1,6 +1,7 @@
 # FizzBuzz
 # Alexander Fraser
 # 28 May 2026
+# Print FizzBuzz results up to value entered.
 
 def collect_input():
     size_str = input("Pick an ending number: ")
