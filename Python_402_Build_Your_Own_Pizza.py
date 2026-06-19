@@ -1,6 +1,7 @@
 # Build Your Own Pizza
 # Alexander Fraser
 # 24 May 2026
+# Collect pizza order and give price.
 
 size_list = {"S": 6, "M": 8, "L": 10}
 base_list = {"C": 0, "T": 1, "D": 2}
