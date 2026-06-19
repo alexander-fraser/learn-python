@@ -1,6 +1,7 @@
 # Primes
 # Alexander Fraser
 # 15 June 2026
+# Generates all primes up to the value entered.
 
 def collect_input():
     while True:
