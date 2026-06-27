@@ -4,17 +4,33 @@
 # Given a list of integers, gives the two that add up to the target.
 
 def collect_input():
+    retry_message = False
     while True:
+        print("Invalid input. Please try again.")
+        retry_message = True
+
         try: 
-            exit_code = False
-            input_list = input("Enter list of integers separated by"
-                + "spaces (blank uses default list): ")
+            input_valid = True
+
+            input_string = input("Enter list of positive integers "
+                + "separated by spaces (blank uses default list): ")
+            input_list = input_string.split()
+            for index, value in enumerate(input_list):
+                value = int(value)
+                if value <= 0:
+                   input_valid = False 
+                input_list[index] = value
+
             input_target = input("Target sum: ")
             input_target = int(input_target)
-            if exit_code == True:
+            if input_target <= 0:
+               input_valid = False 
+
+            if input_valid == True:
                 break
         except:
             pass
+
     return input_list, input_target
 
 def calculate_fib(input_target):
@@ -28,10 +44,10 @@ def calculate_fib(input_target):
     return fib_list, fib_list[input_target-1]
 
 def main():
-    input_target = collect_input()
-    fib_list, fib_value = calculate_fib(input_target)
-    print(fib_list)
-    print(fib_value)
+    input_list, input_target = collect_input()
+    if input_list == []:
+        input_list = [1, 2, 3, 5, 7, 11, 15]
+    print(input_list, input_target)
 
 if __name__ == "__main__":
     main()
