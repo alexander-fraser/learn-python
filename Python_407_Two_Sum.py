@@ -51,15 +51,25 @@ def find_addends(input_list, input_target):
             return [complement, value]
         tried_list.append(value)
 
+def find_two_sum(input_list, input_target):
+    tried_dict = {}
+    for index, value in enumerate(input_list):
+        complement = input_target - value
+        if complement in tried_dict:
+            return [tried_dict[complement], index]
+        tried_dict[value] = index
+
 def main():
     input_list, input_target = collect_input()
     if input_list == []:
         input_list = [1, 2, 3, 5, 7, 11, 15]
 #    output_list = calculate_sum(input_list, input_target)
     output_list = find_addends(input_list, input_target)
+    output_index = find_two_sum(input_list, input_target)
     print("Input list: ", input_list)
     print("Target: ", input_target)
     print("Addends: ", output_list)
+    print("Indices: ", output_index)
 
 if __name__ == "__main__":
     main()
