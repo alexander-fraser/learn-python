@@ -44,9 +44,19 @@ def shift_array(input_list, input_shift):
             output_list.append(input_list[output_index + input_shift - len(input_list)])
     return output_list
 
+def shift_array_elegant(input_list, input_shift):
+    input_list.reverse()
+    input_list_first = input_list[:input_shift]
+    input_list_second = input_list[input_shift:]
+    input_list_first.reverse()
+    input_list_second.reverse()
+    input_list = input_list_first + input_list_second
+    return input_list
+
 def main():
     input_list, input_shift = collect_input()
-    output_list = shift_array(input_list, input_shift)
+#    output_list = shift_array(input_list, input_shift)
+    output_list = shift_array_elegant(input_list, input_shift)
     print(output_list)
 
 if __name__ == "__main__":
