@@ -33,7 +33,6 @@ def collect_input():
 
     if input_string == "":
         input_list = default_array
-    print(input_list)
     return input_list, input_shift
 
 def shift_array(input_list, input_shift):
@@ -41,12 +40,8 @@ def shift_array(input_list, input_shift):
     for output_index in range(0, len(input_list)):
         if output_index + input_shift < len(input_list):
             output_list.append(input_list[output_index + input_shift])
-            print("first")
-            print(input_list[output_index + input_shift])
         else:
             output_list.append(input_list[output_index + input_shift - len(input_list)])
-            print("second")
-            print(input_list[output_index + input_shift - len(input_list)])
     return output_list
 
 def main():
