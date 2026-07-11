@@ -8,7 +8,7 @@ default_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 def collect_input():
     retry_message = False
     while True:
-        if retry_message == True:
+        if retry_message:
             print("Invalid input. Please try again.")
         retry_message = True
 
@@ -26,9 +26,9 @@ def collect_input():
             if input_shift < 0:
                input_valid = False 
 
-            if input_valid == True:
+            if input_valid:
                 break
-        except:
+        except ValueError:
             pass
 
     if input_string == "":
