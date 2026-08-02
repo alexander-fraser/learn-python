@@ -15,33 +15,22 @@ def two_sum(nums: list[int], target: int) -> list[int]:
 
     raise ValueError("No two numbers sum to the target.")
 
-def main() -> None:
+def test_script() -> None:
+    test_cases = [
+        {"nums": [2,7,11,15], "target": 9, "output": [0,1]},   
+        {"nums": [3,2,4], "target": 6, "output": [1,2]},   
+        {"nums": [3,3], "target": 6, "output": [0,1]},   
+    ]
+    
     for index, test in enumerate(test_cases):
         result = two_sum(test["nums"], test["target"])
         assert result == test["output"], (
-            f"Test {index} failed. "
-            f"Expected: {test["output"]}. "
-            f"Realized: {result}."
+            f"Test {index} failed. Expected: {test["output"]}. Realized: {result}."
         )
         print(f"Test {index} passed.")
 
-test_cases = [
-    {
-        "nums": [2,7,11,15], 
-        "target": 9,
-        "output": [0,1]
-    },   
-    {
-        "nums": [2,7,11,15], 
-        "target": 9,
-        "output": [0,1]
-    },   
-    {
-        "nums": [2,7,11,15], 
-        "target": 9,
-        "output": [0,1]
-    }   
-]
+def main() -> None:
+    test_script()
 
 if __name__ == "__main__":
     main()
