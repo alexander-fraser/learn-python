@@ -7,6 +7,7 @@ You are given an array of integers nums and an integer target, return indices of
 """
 
 def two_sum(nums: list[int], target: int) -> list[int]:
+    """Return the indices of two numbers whose sum equals the target."""
     for index1, value1 in enumerate(nums):
         for index2 in range(index1 + 1, len(nums)):
             value2 = nums[index2]
