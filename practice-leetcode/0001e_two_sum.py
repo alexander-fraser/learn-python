@@ -17,6 +17,7 @@ def two_sum(nums: list[int], target: int) -> list[int]:
     raise ValueError("No two numbers sum to the target.")
 
 def test_script() -> None:
+    """Test the function on a set of predefined test cases."""
     test_cases = [
         {"nums": [2,7,11,15], "target": 9, "output": [0,1]},   
         {"nums": [3,2,4], "target": 6, "output": [1,2]},   
