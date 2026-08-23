@@ -7,24 +7,24 @@ You are given two non-empty linked lists representing two non-negative integers.
 """
 
 def add_two_numbers(l1: list[int], l2: list[int]) -> list[int]:
-    """Return the sum of the two integers as an inverted list."""
-    string1 = ""
-    for digit in reversed(l1):
-        string1 = string1 + str(digit)
-    int1 = int(string1)
+    """Take two integers stored in inverted lists. 
+    Return the sum of the two integers as an inverted list."""
+    input_lists = [l1, l2]
+    input_integers = []
+    
+    for item in input_lists:
+        string = ""
+        for digit in reversed(item):
+            string = string + str(digit)
+        input_integers.append(int(string))
 
-    string2 = ""
-    for digit in reversed(l2):
-        string2 = string2 + str(digit)
-    int2 = int(string2)
+    sum_integer = input_integers[0] + input_integers[1]
+    sum_string = str(sum_integer)
+    sum_list = []
+    for digit in reversed(sum_string):
+        sum_list.append(int(digit))
 
-    int_result = int1 + int2
-    str_result = str(int_result)
-    list_result = []
-    for digit in reversed(str_result):
-        list_result.append(int(digit))
-
-    return list_result
+    return sum_list
 
 def test_script() -> None:
     """Test the function on a set of predefined test cases."""
